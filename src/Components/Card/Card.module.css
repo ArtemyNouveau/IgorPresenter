@@ -1,0 +1,9 @@
+.Card {
+    max-width: 300px;
+    margin: 3px
+}
+
+.Img {
+    height: 50%;
+    object-fit: cover;
+}
