@@ -1,0 +1,11 @@
+.Text, .Link {
+    display: inline !important;
+}
+
+.Image {
+    width: 100%;
+}
+
+.Image>img {
+    width: 100%;
+}

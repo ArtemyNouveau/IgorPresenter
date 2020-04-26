@@ -1,17 +1,16 @@
 import React, {Component, Fragment} from "react";
 
-import {Container} from "react-bootstrap"
+import Header from "../../Components/Header/Header";
 
-class Layout extends Component{
+class Layout extends Component {
     render() {
         return (
             <Fragment>
                 <header>
+                    <Header/>
                 </header>
                 <main>
-                    <Container>
-                        {this.props.children}
-                    </Container>
+                    {this.props.children}
                 </main>
                 <footer>
 
