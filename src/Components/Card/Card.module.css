@@ -8,3 +8,35 @@
     height: 50%;
     object-fit: cover;
 }
+
+.CardBody {
+    overflow: hidden;
+}
+
+
+.CardText {
+    overflow: hidden;
+    position: relative;
+    max-height: 55%;
+    text-align: justify;
+    padding-right: 1em;
+}
+
+.CardText:before {
+    content: '…';
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    margin-bottom: -0.1em;
+}
+
+.CardText:after {
+    content: "";
+    position: absolute;
+    right: 0;
+    width: 1em;
+    height: 1.2em;
+    margin-top: 0.2em;
+    margin-bottom: -0.1em;
+    background: white;
+}

@@ -1,4 +1,4 @@
 .FilterContainer {
-    width: 20%;
-    max-width: 300px;
+    display: flex;
+    justify-content: center;
 }

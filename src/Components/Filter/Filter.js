@@ -7,11 +7,13 @@ import styles from './Filter.module.css';
 
 const filter = (props) => {
     return (
-        <Form className={[styles.FilterContainer, props.className].join(' ')}>
+        <Form className={styles.FilterContainer}>
             {types.map((type, index) => {
                 return (
                     <Form.Check key={index}
+                                id={type + "_" + index}
                                 type={"checkbox"}
+                                inline={props.inline}
                                 label={type}
                                 onChange={() => props.changeHandler(type)}
                     />

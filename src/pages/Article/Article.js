@@ -11,7 +11,6 @@ class Article extends Component {
     }
 
     componentDidMount() {
-        console.log(this.props.articleID)
         axiosInstance.get(`/articles/${this.props.articleID}.json`).then((response) => {
             this.setState({fieldset: response.data.fields})
         }).catch((err) => {

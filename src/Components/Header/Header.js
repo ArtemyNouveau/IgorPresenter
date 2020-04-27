@@ -14,13 +14,13 @@ const header = (props) => {
                      alt="logo"/>
                 Cool Moose
             </Navbar.Brand>
-            <Navbar.Toggle aria-controls="basic-navbar-nav"/>
-            <Navbar.Collapse id="basic-navbar-nav" className={"d-none d-lg-block"}>
-                <Nav className="mr-auto">
-                    <Nav.Link href="#home">Home</Nav.Link>
-                    <Nav.Link href="#link">Link</Nav.Link>
-                </Nav>
-            </Navbar.Collapse>
+            {/*<Navbar.Toggle aria-controls="basic-navbar-nav" />*/}
+            {/*<Navbar.Collapse id="basic-navbar-nav">*/}
+            {/*    <Nav className="mr-auto d-block d-lg-none d-xl-none">*/}
+            {/*        <Nav.Link href="#home">Home</Nav.Link>*/}
+            {/*        <Nav.Link href="#link">Link</Nav.Link>*/}
+            {/*    </Nav>*/}
+            {/*</Navbar.Collapse>*/}
         </Navbar>
     )
 }
