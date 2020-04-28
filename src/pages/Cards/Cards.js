@@ -50,34 +50,54 @@ class Cards extends Component {
     }
 
     nextCard = () => {
-        if (this.state.backCounter > 1)
-            this.setState(prevState => ({
-                currentCardIndex: prevState.visited[prevState.visited.length - prevState.backCounter + 1],
-                backCounter: prevState.backCounter - 1
-            }))
-        else {
-            let randomNum = randomInt(0, this.state.filteredCard.length - 1)
-            if (this.state.filteredCard.length > 2)
-                while (randomNum === this.state.currentCardIndex) randomNum = randomInt(0, this.state.filteredCard.length - 1)
-            this.setState(prevState => ({
-                currentCardIndex: randomNum,
-                visited: prevState.visited.concat([randomNum])
-            }))
-        }
+        this.setState(prevState => {
+            if (prevState.backCounter > 1)
+                return {
+                    currentCardIndex: prevState.visited[prevState.visited.length - prevState.backCounter + 1],
+                    backCounter: prevState.backCounter - 1
+                }
+            else {
+                let randomNum = randomInt(0, prevState.filteredCard.length - 1)
+                if (prevState.filteredCard.length > 2)
+                    while (randomNum === prevState.currentCardIndex) randomNum = randomInt(0, prevState.filteredCard.length - 1)
+                return {
+                    currentCardIndex: randomNum,
+                    visited: prevState.visited.concat([randomNum])
+                }
+            }
+        })
     }
 
     prevCard = () => {
-        if (this.state.backCounter >= this.state.visited.length) return
-        this.setState(prevState => ({
-            currentCardIndex: prevState.visited[prevState.visited.length - prevState.backCounter - 1],
-            backCounter: prevState.backCounter + 1
-        }))
+        this.setState(prevState => {
+            if (prevState.backCounter >= prevState.visited.length) return prevState
+            let nextIndex = prevState.visited[prevState.visited.length - prevState.backCounter - 1]
+            if (nextIndex >= prevState.filteredCard.length) {
+                return prevState
+            }
+            return {
+                currentCardIndex: nextIndex,
+                backCounter: prevState.backCounter + 1
+            }
+        })
     }
 
     render() {
         if (this.state.cards === null) return null;
 
-        this.setState(prevState => ({filteredCard: this.filterCards(prevState.cards)}))
+        this.setState(prevState => {
+            const filteredCards = this.filterCards(prevState.cards)
+            if (prevState.currentCardIndex >= filteredCards.length) {
+                let randomNum = randomInt(0, filteredCards.length - 1)
+                return {
+                    filteredCard: filteredCards,
+                    currentCardIndex: randomNum
+                }
+            }
+            return {
+                filteredCard: filteredCards
+            }
+        })
         if (this.state.filteredCard.length === 0) return <p>No Cards</p>
         const card = this.currentCard();
         return (

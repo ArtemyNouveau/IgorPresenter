@@ -1,5 +1,5 @@
 import React, {Component, Fragment} from "react";
-import {Container, Row, Col, Button, Accordion, Card, Fade, Breadcrumb} from "react-bootstrap";
+import {Container, Row, Col, Button, Accordion, Card, Spinner, Breadcrumb} from "react-bootstrap";
 import {BrowserRouter, Route, Switch, NavLink, Link, withRouter} from 'react-router-dom';
 
 import Article from "../../pages/Article/Article";
@@ -42,43 +42,54 @@ class ContentContainer extends Component {
     render() {
         console.log(this.state.filterParams)
         return (
-            <Switch>
-                <Route path="/article">
-                    <Breadcrumb>
-                        <Breadcrumb.Item onClick={() => this.props.history.push('/')}>Home</Breadcrumb.Item>
-                        <Breadcrumb.Item active>
-                            {this.state.articleName}
-                        </Breadcrumb.Item>
-                    </Breadcrumb>
-                    <Container>
-                        <Article articleID={this.state.articleID}/>
-                    </Container>
-                </Route>
-                <Route path="/">
-                    <Container>
-                        <Cards loadingStart={this.loadingStart}
-                               loadingEnd={this.loadingEnd}
-                               clickHandler={this.openHandler}
-                               filterParams={this.state.filterParams}/>
-                    </Container>
-                    <Accordion style={{position: "absolute", bottom: 0, left: 0, width: "100%"}}>
-                        <Card>
-                            <Accordion.Collapse eventKey="0">
-                                <Filter className={styles.FilterTop}
-                                        inline
-                                        changeHandler={this.filterChanged}/>
-                            </Accordion.Collapse>
-                            <Card.Header>
-                                <Accordion.Toggle as={Button}
-                                                  variant="link"
-                                                  eventKey="0">
-                                    Filter
-                                </Accordion.Toggle>
-                            </Card.Header>
-                        </Card>
-                    </Accordion>
-                </Route>
-            </Switch>
+            <Fragment>
+                {this.state.loading ?
+                    <div className={styles.Spinner}>
+                        <Spinner animation="border"
+                                 role="status">
+                            <span className="sr-only">Loading...</span>
+                        </Spinner>
+                    </div> :
+                    null
+                }
+                <Switch>
+                    <Route path="/article">
+                        <Breadcrumb>
+                            <Breadcrumb.Item onClick={() => this.props.history.push('/')}>Home</Breadcrumb.Item>
+                            <Breadcrumb.Item active>
+                                {this.state.articleName}
+                            </Breadcrumb.Item>
+                        </Breadcrumb>
+                        <Container>
+                            <Article articleID={this.state.articleID}/>
+                        </Container>
+                    </Route>
+                    <Route path="/">
+                        <Container>
+                            <Cards loadingStart={this.loadingStart}
+                                   loadingEnd={this.loadingEnd}
+                                   clickHandler={this.openHandler}
+                                   filterParams={this.state.filterParams}/>
+                        </Container>
+                        <Accordion style={{position: "absolute", bottom: 0, left: 0, width: "100%"}}>
+                            <Card>
+                                <Accordion.Collapse eventKey="0">
+                                    <Filter className={styles.FilterTop}
+                                            inline
+                                            changeHandler={this.filterChanged}/>
+                                </Accordion.Collapse>
+                                <Card.Header>
+                                    <Accordion.Toggle as={Button}
+                                                      variant="link"
+                                                      eventKey="0">
+                                        Filter
+                                    </Accordion.Toggle>
+                                </Card.Header>
+                            </Card>
+                        </Accordion>
+                    </Route>
+                </Switch>
+            </Fragment>
         )
     }
 }
